@@ -1,6 +1,8 @@
 ﻿using Autofac.Extensions.DependencyInjection;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
+using Nop.Services.Employees;
+using Nop.Web.Areas.Admin.Factories;
 using Nop.Web.Framework.Infrastructure.Extensions;
 
 namespace Nop.Web;
@@ -18,7 +20,8 @@ public partial class Program
             builder.Configuration.AddJsonFile(path, true, true);
         }
         builder.Configuration.AddEnvironmentVariables();
-
+        builder.Services.AddScoped<IEmployeeModelFactory, EmployeeModelFactory>();
+        builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         //load application settings
         builder.Services.ConfigureApplicationSettings(builder);
 
